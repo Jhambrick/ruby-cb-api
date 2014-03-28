@@ -54,7 +54,7 @@ module Cb
             categoryhash =  json_hash
           end
         end
-        categoryhash
+        categoryhash['ResponseCategories']['Categories']['Category']
     end
   end
 end
