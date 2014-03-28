@@ -16,10 +16,10 @@ module Cb
             end
           end
 
-          my_api.append_api_responses(categoryList, json_hash['ResponseCategories']).to_json
+          my_api.append_api_responses(categoryList, json_hash['ResponseCategories'])
         end
 
-        my_api.append_api_responses(categoryList, json_hash).to_json
+        my_api.append_api_responses(categoryList, json_hash)
       end
 
       def self.search_by_host_site(host_site)
@@ -44,6 +44,18 @@ module Cb
         my_api.append_api_responses(categoryList, json_hash)
       end
 
+      def self.category_json
+        my_api = Cb::Utils::Api.instance
+        json_hash = my_api.cb_get(Cb.configuration.uri_job_category_search)
+        categoryhash = {}
+
+        if json_hash.has_key?('ResponseCategories')
+          if json_hash['ResponseCategories'].has_key?('Categories')
+            categoryhash =  json_hash
+          end
+        end
+        categoryhash
     end
   end
+end
 end
